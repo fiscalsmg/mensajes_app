@@ -80,11 +80,9 @@ public class MessageDAO {
                 int countRowsUpdated = ps.executeUpdate();
                 if (countRowsUpdated != 0) {
                     System.err.println("El mensaje ha sido borrado");
-                }else{
+                } else {
                     System.err.println("No encuentra el ID del mensaje");
                 }
-                    
-                
 
             } catch (SQLException e) {
                 System.err.println(e);
@@ -97,6 +95,24 @@ public class MessageDAO {
     }
 
     public static void updateMessageDB(Message message) {
+        Conexion dbConect = new Conexion();
+        PreparedStatement ps = null;
+        try (Connection conexion = dbConect.get_connection()) {
+            try {
+                String query = "UPDATE mensajes SET mensaje = ? WHERE id_mensaje = ?";
+                ps = conexion.prepareStatement(query);
+                ps.setString(1, message.getMessage());
+                ps.setInt(2, message.getId_message());
 
+                ps.executeUpdate();
+                System.out.println("El mensaje se actualizo correctamente");
+
+            } catch (SQLException e) {
+                System.err.println(e);
+                System.err.println("No se pudo actualizar el mensaje");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 }

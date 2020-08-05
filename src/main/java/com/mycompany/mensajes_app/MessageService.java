@@ -44,6 +44,15 @@ public class MessageService {
     }
 
     public static void editMessage() {
-
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Escribe el nuevo mensaje");
+        String mensaje=sc.nextLine();
+        
+        System.err.println("Escribe el ID del mensaje a eliminar");
+        int id_mensaje=sc.nextInt();
+        Message actualizacion =new Message();
+        actualizacion.setId_message(id_mensaje);
+        actualizacion.setMessage(mensaje);
+        MessageDAO.updateMessageDB(actualizacion);
     }
 }
