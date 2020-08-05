@@ -23,8 +23,8 @@ public class Inicio {
             System.out.println("Message Aplication");
             System.out.println("1. Create Message");
             System.out.println("2. List to message");
-            System.out.println("3. Edit Message");
-            System.out.println("4. Delete Message");
+            System.out.println("3. Delete Message");
+            System.out.println("4. Edit Message");
             System.out.println("5. salir");
             //leemos la opcion del usuario 
             option = sc.nextInt();

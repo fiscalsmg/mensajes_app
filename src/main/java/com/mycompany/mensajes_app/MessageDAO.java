@@ -67,7 +67,33 @@ public class MessageDAO {
     }
 
     public static void deleteMessageDB(int id_message) {
+        Conexion dbConect = new Conexion();
+        PreparedStatement ps = null;
 
+        try (Connection conexion = dbConect.get_connection()) {
+
+            try {
+                String query = "DELETE FROM mensajes WHERE id_mensaje = ?";
+                ps = conexion.prepareStatement(query);
+                ps.setInt(1, id_message);
+                //statement.executeUpdate() retorna la cantidad de filas affectadas por la consulta.
+                int countRowsUpdated = ps.executeUpdate();
+                if (countRowsUpdated != 0) {
+                    System.err.println("El mensaje ha sido borrado");
+                }else{
+                    System.err.println("No encuentra el ID del mensaje");
+                }
+                    
+                
+
+            } catch (SQLException e) {
+                System.err.println(e);
+                System.err.println("No se puedo borrar el mensaje");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     public static void updateMessageDB(Message message) {
