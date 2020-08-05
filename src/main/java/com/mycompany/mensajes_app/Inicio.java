@@ -5,7 +5,6 @@
  */
 package com.mycompany.mensajes_app;
 
-import java.sql.Connection;
 import java.util.Scanner;
 
 /**

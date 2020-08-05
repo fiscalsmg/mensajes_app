@@ -33,7 +33,7 @@ public class MessageService {
     }
 
     public static void listMessage() {
-
+        MessageDAO.readMessageDB();
     }
 
     public static void deleteMessage() {
