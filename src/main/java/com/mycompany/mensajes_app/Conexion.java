@@ -20,9 +20,9 @@ public class Conexion {
     public Connection get_connection(){
         Connection conection =null;
         try{
+            //Conectamos a la base de datos
             conection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mensajes_app","root","");
-            
-                  
+              
         }catch(SQLException e){
             System.out.println(e);
         }

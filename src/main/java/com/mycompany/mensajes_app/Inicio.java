@@ -9,7 +9,8 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 /**
- *
+ *Menu que se conecta a la capa de servicios, y esta capa se conecta a la capa DAO
+ * Serie de capas para tener el flujo de informacion 
  * @author Fiscal
  */
 public class Inicio {
