@@ -8,13 +8,49 @@ package com.mycompany.mensajes_app;
 import java.util.Scanner;
 
 /**
- *Menu que se conecta a la capa de servicios, y esta capa se conecta a la capa DAO
- * Serie de capas para tener el flujo de informacion 
+ * Menu que se conecta a la capa de servicios, y esta capa se conecta a la capa
+ * DAO Serie de capas para tener el flujo de informacion
+ *
  * @author Fiscal
  */
 public class Inicio {
 
     public static void main(String args[]) {
+        menuPrincipal();
+    }
+
+    public static void menuPrincipal() {
+        //instanciamos la clase scanner para leer datos
+        Scanner sc = new Scanner(System.in);  
+        int opcion = 0;  
+
+        //primer menú
+        do{
+            System.out.println("===================");
+            System.out.println("\n Mini red social \n");
+            System.out.println("1. Registrarse");
+            System.out.println("2. Iniciar sesión");
+            System.out.println("3. salir \n");
+            //leemos la opción del usuario
+            opcion = sc.nextInt();
+
+            switch (opcion){
+                case 1:
+                   UserService.createUser();
+                    break;
+                case 2:
+                   /* User resultado = UsuarioService.iniciarSesion();
+                    if(resultado.getId_usuario() > 0){
+                        menuSesion(resultado);
+                    }*/   
+                    break;
+                default:
+                    break;
+            }
+        }while(opcion != 3);
+    }
+
+    public static void menuSesion(User user) {
         Scanner sc = new Scanner(System.in);
         int option = 0;
 
@@ -48,6 +84,5 @@ public class Inicio {
             }
 
         } while (option != 5);
-
     }
 }
