@@ -7,6 +7,7 @@ package com.mycompany.mensajes_app;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -38,9 +39,63 @@ public class UserDAO {
             System.out.println(e);
         }
     }
-    
-    
-     public static void sessionStartDB(){
-        
+
+    public static User sessionStartDB(User user) {
+        Conexion dbConect = new Conexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try (Connection conexion = dbConect.get_connection()) {
+            try {
+                String query = "SELECT * FROM `usuarios` WHERE correo=? AND clave=?";
+                ps = conexion.prepareStatement(query);
+                ps.setString(1, user.getCorreo());
+                ps.setString(2, user.getClave());
+                rs = ps.executeQuery();
+
+                User login = new User();
+                if (rs.next()) {
+                    System.out.println("login correcto!");
+                    login.setId_user(rs.getInt("id_usuario"));
+                    login.setCorreo(rs.getString("correo"));
+                    login.setNombre_completo(rs.getString("nombre_completo"));
+                } else {
+                    System.out.println("login failed");
+                }
+                //retornamos el objeto usuario con los datos o vacío
+                return login;
+
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public static void readUSerDB() {
+        Conexion dbConect = new Conexion();
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try (Connection conexion = dbConect.get_connection()) {
+            
+            String query = "SELECT * FROM usuarios";
+            ps = conexion.prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt("id_usuario"));
+                System.out.println("Correo: " + rs.getString("correo"));
+                System.out.println("Clave: " + rs.getString("clave"));
+                System.out.println("Nombre: " + rs.getString("nombre_completo"));
+                System.out.println("");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Error verifique ");
+            System.out.println(e);
+        }
     }
 }

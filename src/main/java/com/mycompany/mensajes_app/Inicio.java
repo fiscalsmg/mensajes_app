@@ -21,11 +21,11 @@ public class Inicio {
 
     public static void menuPrincipal() {
         //instanciamos la clase scanner para leer datos
-        Scanner sc = new Scanner(System.in);  
-        int opcion = 0;  
+        Scanner sc = new Scanner(System.in);
+        int opcion = 0;
 
         //primer menú
-        do{
+        do {
             System.out.println("===================");
             System.out.println("\n Mini red social \n");
             System.out.println("1. Registrarse");
@@ -34,20 +34,22 @@ public class Inicio {
             //leemos la opción del usuario
             opcion = sc.nextInt();
 
-            switch (opcion){
+            switch (opcion) {
                 case 1:
-                   UserService.createUser();
+                    UserService.createUser();
                     break;
                 case 2:
-                   /* User resultado = UsuarioService.iniciarSesion();
-                    if(resultado.getId_usuario() > 0){
+                    User resultado = UserService.sessionStart();
+                    System.out.println("hola");
+                    if (resultado.getId_user() > 0) {
                         menuSesion(resultado);
-                    }*/   
+                    }
+
                     break;
                 default:
                     break;
             }
-        }while(opcion != 3);
+        } while (opcion != 3);
     }
 
     public static void menuSesion(User user) {
@@ -61,7 +63,8 @@ public class Inicio {
             System.out.println("2. List to message");
             System.out.println("3. Delete Message");
             System.out.println("4. Edit Message");
-            System.out.println("5. salir");
+            System.out.println("5. view users");
+            System.out.println("6. salir");
             //leemos la opcion del usuario 
             option = sc.nextInt();
 
@@ -77,6 +80,9 @@ public class Inicio {
                     break;
                 case 4:
                     MessageService.editMessage();
+                    break;
+                case 5:
+                    UserService.listUser();
                     break;
                 default:
                     break;

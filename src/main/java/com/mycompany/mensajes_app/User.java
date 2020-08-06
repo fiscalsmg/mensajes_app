@@ -23,6 +23,13 @@ public class User {
         this.clave = clave;
         this.nombre_completo = nombre_completo;
     }
+    
+
+    //login user
+    public User(String correo, String clave) {
+        this.correo = correo;
+        this.clave = clave;
+    }
 
     
     

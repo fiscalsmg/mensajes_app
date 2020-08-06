@@ -16,28 +16,43 @@ public class UserService {
 
     public static void createUser() {
         Scanner sc = new Scanner(System.in);
-        
-        
-        
+
         System.out.println("Escribe tu correo");
         String correo = sc.nextLine();
 
         System.out.println("Escribe tu clave");
         String clave = sc.nextLine();
-        clave=cifrarMD5(clave);
-        
+        clave = cifrarMD5(clave);
+
         System.out.println("Escribe tu Nombre");
         String nombre = sc.nextLine();
-        
-        User registro =new User(correo, clave, nombre);
+
+        User registro = new User(correo, clave, nombre);
         UserDAO.createUserDB(registro);
     }
-    public static String cifrarMD5(String clave){ 
+
+    public static String cifrarMD5(String clave) {
         String md5Hex = DigestUtils.md5Hex(clave);
         return md5Hex;
     }
+
+    public static User sessionStart() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Escribe tu correo");
+        String correo = sc.nextLine();
+
+        System.out.println("Escribe tu clave");
+        String clave = sc.nextLine();
+        clave = cifrarMD5(clave);
+
+        User login = new User(correo, clave);
+        User resultado = UserDAO.sessionStartDB(login);
+
+        return resultado;
+    }
     
-    public static void sessionStart(){
-        
+    public static void listUser(){
+         UserDAO.readUSerDB();
     }
 }
